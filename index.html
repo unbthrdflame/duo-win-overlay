@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<style>
+
+body{
+background:transparent;
+margin:0;
+font-family:Arial Black, Arial, sans-serif;
+}
+
+.container{
+position:absolute;
+right:0;
+text-align:right;
+}
+
+.label{
+color:#8B004B;
+-webkit-text-stroke:3px white;
+font-size:48px;
+}
+
+.percent{
+color:#8B004B;
+-webkit-text-stroke:4px white;
+font-size:110px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="label">
+WINS
+</div>
+
+<div class="percent" id="pct">
+0%
+</div>
+
+</div>
+
+<script>
+
+async function update(){
+
+let data = await fetch("data.json");
+let stats = await data.json();
+
+let wins = stats.wins;
+let losses = stats.losses;
+
+let percent = 0;
+
+if(wins + losses > 0){
+percent = Math.round((wins/(wins+losses))*100);
+}
+
+document.getElementById("pct").innerText = percent + "%";
+
+}
+
+setInterval(update,1000);
+
+</script>
+
+</body>
+</html>
