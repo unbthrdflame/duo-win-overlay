@@ -43,7 +43,7 @@ font-weight:700;
 WINS
 </div>
 
-<div class="percent" id="pct">
+<div class="percent" id="percent">
 0%
 </div>
 
@@ -65,7 +65,7 @@ if(wins + losses > 0){
 percent = Math.round((wins/(wins+losses))*100);
 }
 
-document.getElementById("pct").innerText = percent + "%";
+document.getElementById("percent").innerText = percent + "%";
 
 }
 
@@ -73,5 +73,30 @@ setInterval(update,1000);
 
 </script>
 
+<script>
+
+async function updateOverlay(){
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8080/GetGlobalVariable?name=winPercent");
+        const percent = await response.text();
+
+        const winsResponse = await fetch("http://127.0.0.1:8080/GetGlobalVariable?name=wins");
+        const wins = await winsResponse.text();
+
+        document.getElementById("percent").innerText = percent + "%";
+        document.getElementById("wins").innerText = wins;
+
+    }catch(err){
+        console.log("waiting for Streamer.bot...");
+    }
+
+}
+
+setInterval(updateOverlay,1000);
+
+</script>
+  
 </body>
 </html>
