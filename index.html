@@ -33,48 +33,6 @@ font-weight:700;
 
 </style>
 
-  <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC6L7u0X3J2U1tfTkIkI9KE4eRy57CLKNc",
-  authDomain: "wins-counter.firebaseapp.com",
-  databaseURL: "https://wins-counter-default-rtdb.firebaseio.com/",
-  projectId: "wins-counter",
-  storageBucket: "wins-counter.firebasestorage.app",
-  messagingSenderId: "427593572666",
-  appId: "1:427593572666:web:7a7e6ce4b4806b6dddbb03"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-document.getelementyid("pct").innertext = "test;
-
-const winsRef = ref(db, "wins");
-const lossesRef = ref(db, "losses");
-
-let wins = 0;
-let losses = 0;
-
-function updateDisplay() {
-  const total = wins + losses;
-  const pct = total === 0 ? 0 : Math.round((wins / total) * 100);
-  document.getElementById("pct").innerText = pct + "%";
-}
-
-onValue(winsRef, (snap) => {
-  wins = snap.val()  0;
-  updateDisplay();
-});
-
-onValue(lossesRef, (snap) => {
-  losses = snap.val()  0;
-  updateDisplay();
-});
-</script>
-
 </head>
 
 <body>
@@ -138,6 +96,48 @@ async function updateOverlay(){
 
 setInterval(updateOverlay,1000);
 
+</script>
+
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC6L7u0X3J2U1tfTkIkI9KE4eRy57CLKNc",
+  authDomain: "wins-counter.firebaseapp.com",
+  databaseURL: "https://wins-counter-default-rtdb.firebaseio.com/",
+  projectId: "wins-counter",
+  storageBucket: "wins-counter.firebasestorage.app",
+  messagingSenderId: "427593572666",
+  appId: "1:427593572666:web:7a7e6ce4b4806b6dddbb03"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+document.getelementyid("pct").innertext = "test;
+
+const winsRef = ref(db, "wins");
+const lossesRef = ref(db, "losses");
+
+let wins = 0;
+let losses = 0;
+
+function updateDisplay() {
+  const total = wins + losses;
+  const pct = total === 0 ? 0 : Math.round((wins / total) * 100);
+  document.getElementById("pct").innerText = pct + "%";
+}
+
+onValue(winsRef, (snap) => {
+  wins = snap.val()  0;
+  updateDisplay();
+});
+
+onValue(lossesRef, (snap) => {
+  losses = snap.val()  0;
+  updateDisplay();
+});
 </script>
   
 </body>
