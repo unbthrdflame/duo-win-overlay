@@ -50,6 +50,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+document.getelementyid("pct").innertext = "test;
+
 const winsRef = ref(db, "wins");
 const lossesRef = ref(db, "losses");
 
